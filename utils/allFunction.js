@@ -1,14 +1,5 @@
 const Canvas = require("canvas");
 
-/* 
-  Fungsi untuk menggambar teks rata tengah
-  ctx     → context canvas
-  text    → isi teks
-  y       → posisi vertikal teks (tengah berdasarkan tinggi huruf)
-  font    → gaya font (misal: "bold 32px Arial")
-  color   → warna teks (misal: "#ffffff")
-  width   → lebar total canvas
-*/
 function drawCenteredText(ctx, text = String, y = Number, font = String, color = String, width = Number) {
   ctx.font = font;
   ctx.fillStyle = color;
@@ -17,14 +8,6 @@ function drawCenteredText(ctx, text = String, y = Number, font = String, color =
   ctx.fillText(text, x, y);
 }
 
-/*
-  Simple canvas text editing
-  ctx     → context canvas
-  text    → the text
-  x, y    → text position
-  font    → font style
-  color   → text color
-*/
 function drawTextBlock(ctx, text = String, x = Number, y = Number, font = String, color = String) {
   ctx.font = font;
   ctx.fillStyle = color;
