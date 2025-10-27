@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+out/
+
+# Dependency directories
+jspm_packages/
+
+# Vercel
+.vercel/
+
+# IDE / editor files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Optional cache
+.cache/
+.ne
