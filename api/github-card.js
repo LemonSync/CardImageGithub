@@ -33,7 +33,7 @@ app.get("/api/github-card", async (req, res) => {
     return SpecialErrorMessage(res, Canvas, `Please enter the Call number, Facebook Account, and Twitter Account`);
   }
     
-    return typeOneFunction(res, Canvas, github.avatar_url, github.name, github.login, github.desc, github.twitter, github.facebook, github.no, github.totalStars, github.totalRepos, github.locate, github.follower);
+    return typeOneFunction(res, Canvas, github.avatar_url, github.name, github.login, github.desc, twitter, facebook, no, github.totalStars, github.totalRepos, github.locate, github.follower);
   }
 
   if (typeNum === 2) {
@@ -48,5 +48,6 @@ app.get("/api/github-card", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
