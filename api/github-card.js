@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const Canvas = require("canvas");
+const path = require("path");
 const app = express();
 
 app.use(cors());
@@ -54,6 +55,7 @@ app.get("/api/github-card", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
