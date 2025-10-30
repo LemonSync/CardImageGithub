@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/github-card", async (req, res) => {
-  const { username, desc = "Orang yang pengen jadi programmer tapi enggan ngoding", type } = req.query;
+  const { username, desc = "Orang yang pengen jadi programmer tapi enggan ngoding", type, no, facebook, twitter } = req.query;
 
   if (!username) {
     return SpecialErrorMessage(res, Canvas, `Please enter the username`);
@@ -29,6 +29,10 @@ app.get("/api/github-card", async (req, res) => {
   }
 
   if (typeNum === 1) {
+    if (!no || !facebook || !twitter) {
+    return SpecialErrorMessage(res, Canvas, `Please enter the Call number, Facebook Account, and Twitter Account`);
+  }
+    
     return typeOneFunction(res, Canvas, github.avatar_url, github.name, github.login, github.desc, github.twitter, github.facebook, github.no, github.totalStars, github.totalRepos, github.locate, github.follower);
   }
 
@@ -44,4 +48,5 @@ app.get("/api/github-card", async (req, res) => {
 });
 
 module.exports = app;
+
 
