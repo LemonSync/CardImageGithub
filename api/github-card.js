@@ -9,24 +9,7 @@ const { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage
 const { drawCenteredText, drawTextBlock, wrapText, leftWrapText, rightWrapText } = require("../utils/allFunction");
 const { getGithubData } = require("../utils/githubData");
 
-// ============================
-
-const github = {
-  profile: "./profile.jpg",
-  name: "Lemon",
-  login: "@LemonSync",
-  desc: "Saya adalah seseorang yang misterius...",
-  twitter: "LemonSync",
-  facebook: "Lemon",
-  no: "+62 217 217 234",
-  email: "grouplemon0@gmail.com",
-  repo: 16,
-  star: 111,
-  locate: "Indonesian",
-  follower: 46
-};
-
-// ============================
+// =========================================
 
 app.get("/", (req, res) => {
   res.send("🚀 Server berhasil dijalankan");
@@ -46,18 +29,19 @@ app.get("/api/github-card", async (req, res) => {
   }
 
   if (typeNum === 1) {
-    return typeOneFunction(res, Canvas, github.profile, github.name, github.login, github.desc, github.twitter, github.facebook, github.no, github.star, github.repo, github.locate, github.follower);
+    return typeOneFunction(res, Canvas, github.avatar_url, github.name, github.login, github.desc, github.twitter, github.facebook, github.no, github.totalStars, github.totalRepos, github.locate, github.follower);
   }
 
   if (typeNum === 2) {
-    return typeTwoFunction(res, Canvas, github.profile, github.name, github.login, github.desc);
+    return typeTwoFunction(res, Canvas, github.avatar_url, github.name, github.login, github.desc);
   }
 
   if (typeNum === 3) {
-    return typeThreeFunction(res, Canvas, github.profile, github.name);
+    return typeThreeFunction(res, Canvas, github.avatar_url, github.name);
   }
 
   return SpecialErrorMessage(res, Canvas, `Type 1-3 only`);
 });
 
 module.exports = app;
+
