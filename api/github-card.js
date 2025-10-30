@@ -33,11 +33,6 @@ app.get("/api/github-card", async (req, res) => {
 
 
   const github = await getGithubData(username);
-  const descriptionText =
-      desc && desc !== "No description provided"
-        ? desc
-        : github.bio || "Pengguna ini belum menulis bio.";
-  github.desc = descriptionText;
 
   
   const typeNum = parseInt(type);
@@ -65,6 +60,7 @@ app.get("/api/github-card", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
