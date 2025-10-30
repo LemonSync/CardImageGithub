@@ -11,6 +11,12 @@ const { getGithubData } = require("../utils/githubData");
 
 // =========================================
 
+Canvas.registerFont(path.join(__dirname, "fonts", "arial.ttf"), {
+  family: "Arial"
+});
+
+//==========================================
+
 app.get("/", (req, res) => {
   res.send("🚀 Server berhasil dijalankan");
 });
@@ -48,6 +54,7 @@ app.get("/api/github-card", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
