@@ -4,9 +4,10 @@ const path = require("path");
 
 //============================================================
 
-Canvas.registerFont(path.join(__dirname, "..", "media", "fonts", "arial.ttf"), {
+Canvas.registerFont(path.join(__dirname, "..", "fonts", "arial.ttf"), {
   family: "Arial"
 });
+
 
 function errorMessage(
     res,
@@ -221,5 +222,6 @@ ctx.restore();
 
 
 module.exports = { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage }
+
 
 
