@@ -26,7 +26,7 @@ function errorMessage(
     ctx.fillRect(width / 2, 0, width, height);
             
     leftWrapText(ctx, `Some error, Please visit the repo github.com/LemonSync/repositori and give issue, Lemon gonna fix it` + `\n\n-Lemon`, 180, 18, "bold 20px Arimo", "#005709ff", 330, 25);
-    rightWrapText(ctx, `The Error:  ` + err.message + `\n\n-Lemon`, 180, width - 18, "bold 20px Arimo", "#00e016ff", 330, 25);
+    rightWrapText(ctx, `The Error:  ` + err.message + `\n\n- Lemon`, 180, width - 18, "bold 20px Arimo", "#00e016ff", 330, 25);
             
     const output = canvas.toBuffer("image/png");
     res.setHeader("Content-Type", "image/png");
@@ -230,6 +230,7 @@ ctx.restore();
 
 
 module.exports = { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage }
+
 
 
 
