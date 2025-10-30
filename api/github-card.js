@@ -30,7 +30,16 @@ app.get("/api/github-card", async (req, res) => {
     return SpecialErrorMessage(res, Canvas, `Please enter the username`);
   }
 
+
+
   const github = await getGithubData(username);
+  const descriptionText =
+      desc && desc !== "No description provided"
+        ? desc
+        : github.bio || "Pengguna ini belum menulis bio.";
+  github.desc = descriptionText;
+
+  
   const typeNum = parseInt(type);
   if (isNaN(typeNum)) {
     return SpecialErrorMessage(res, Canvas, `Invalid type format, Only 1 - 6 available`);
@@ -56,6 +65,7 @@ app.get("/api/github-card", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
