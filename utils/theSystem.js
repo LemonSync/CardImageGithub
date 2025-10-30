@@ -1,6 +1,12 @@
 const { drawCenteredText, drawTextBlock, wrapText, leftWrapText, rightWrapText, drawHexagonLancip, drawHexagonTumpul } = require("./allFunction");
+const Canvas = require("canvas");
+const path = require("path");
 
 //============================================================
+
+Canvas.registerFont(path.join(__dirname, "..", "media", "fonts", "arial.ttf"), {
+  family: "Arial"
+});
 
 function errorMessage(
     res,
@@ -215,4 +221,5 @@ ctx.restore();
 
 
 module.exports = { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage }
+
 
