@@ -4,7 +4,7 @@ const path = require("path");
 
 //============================================================
 
-Canvas.registerFont(path.join(__dirname, "..", "fonts", "Arimo-Reguler.ttf"), {
+Canvas.registerFont(path.join(__dirname, "..", "fonts", "Arimo-Regular.ttf"), {
   family: "Arimo"
 });
 
@@ -230,6 +230,7 @@ ctx.restore();
 
 
 module.exports = { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage }
+
 
 
 
