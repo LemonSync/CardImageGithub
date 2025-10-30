@@ -4,8 +4,8 @@ const path = require("path");
 
 //============================================================
 
-Canvas.registerFont(path.join(__dirname, "..", "fonts", "arial.ttf"), {
-  family: "Arial"
+Canvas.registerFont(path.join(__dirname, "..", "fonts", "Arimo-Reguler.ttf"), {
+  family: "Arimo"
 });
 
 
@@ -25,8 +25,8 @@ function errorMessage(
     ctx.fillStyle = "#005709ff";
     ctx.fillRect(width / 2, 0, width, height);
             
-    leftWrapText(ctx, `Some error, Please visit the repo github.com/LemonSync/repositori and give issue, Lemon gonna fix it` + `\n\n-Lemon`, 180, 18, "bold 20px Arial", "#005709ff", 330, 25);
-    rightWrapText(ctx, `The Error:  ` + err.message + `\n\n-Lemon`, 180, width - 18, "bold 20px Arial", "#00e016ff", 330, 25);
+    leftWrapText(ctx, `Some error, Please visit the repo github.com/LemonSync/repositori and give issue, Lemon gonna fix it` + `\n\n-Lemon`, 180, 18, "bold 20px Arimo", "#005709ff", 330, 25);
+    rightWrapText(ctx, `The Error:  ` + err.message + `\n\n-Lemon`, 180, width - 18, "bold 20px Arimo", "#00e016ff", 330, 25);
             
     const output = canvas.toBuffer("image/png");
     res.setHeader("Content-Type", "image/png");
@@ -52,8 +52,8 @@ function SpecialErrorMessage(
     ctx.fillStyle = "#005709ff";
     ctx.fillRect(width / 2, 0, width, height);
             
-    leftWrapText(ctx, text, 180, 18, "bold 20px Arial", "#005709ff", 330, 25);
-    rightWrapText(ctx, `-Lemon`, 180, width - 18, "bold 20px Arial", "#00e016ff", 330, 25);
+    leftWrapText(ctx, text, 180, 18, "bold 20px Arimo", "#005709ff", 330, 25);
+    rightWrapText(ctx, `-Lemon`, 180, width - 18, "bold 20px Arimo", "#00e016ff", 330, 25);
             
     const output = canvas.toBuffer("image/png");
     res.setHeader("Content-Type", "image/png");
@@ -101,23 +101,23 @@ async function typeOneFunction(
     ctx.drawImage(avatarImg, AVATAR.x, AVATAR.y, AVATAR.size, AVATAR.size);
     ctx.restore();
 
-    leftWrapText(ctx, name, 160, 380, "bold 40px Arial", "#ffff", 330, 40);
-    leftWrapText(ctx, login, 180, 380, "20px Arial", "#ffff", 330, 40);
-    leftWrapText(ctx, desc, 220, 380, "24px Arial", "#ffff", 330, 25);
+    leftWrapText(ctx, name, 160, 380, "bold 40px Arimo", "#ffff", 330, 40);
+    leftWrapText(ctx, login, 180, 380, "20px Arimo", "#ffff", 330, 40);
+    leftWrapText(ctx, desc, 220, 380, "24px Arimo", "#ffff", 330, 25);
 
-    leftWrapText(ctx, `@` + twitter, 615, 550, "19px Arial", "#ffff", 180, 25);
-    leftWrapText(ctx, `@` + facebook, 660, 550, "19px Arial", "#ffff", 180, 25);
-    leftWrapText(ctx, no, 705, 550, "19px Arial", "#ffff", 180, 25);
+    leftWrapText(ctx, `@` + twitter, 615, 550, "19px Arimo", "#ffff", 180, 25);
+    leftWrapText(ctx, `@` + facebook, 660, 550, "19px Arimo", "#ffff", 180, 25);
+    leftWrapText(ctx, no, 705, 550, "19px Arimo", "#ffff", 180, 25);
 
-    leftWrapText(ctx, `⭐ : `, 625, 70, "19px Arial", "#ff9500ff", 180, 25);
-    leftWrapText(ctx, `📦 : `, 655, 70, "19px Arial", "#ff9500ff", 180, 25);
-    leftWrapText(ctx, `🏠 : `, 685, 70, "19px Arial", "#ff9500ff", 180, 25);
-    leftWrapText(ctx, `👥 : `, 715, 70, "19px Arial", "#ff9500ff", 180, 25);
+    leftWrapText(ctx, `⭐ : `, 625, 70, "19px Arimo", "#ff9500ff", 180, 25);
+    leftWrapText(ctx, `📦 : `, 655, 70, "19px Arimo", "#ff9500ff", 180, 25);
+    leftWrapText(ctx, `🏠 : `, 685, 70, "19px Arimo", "#ff9500ff", 180, 25);
+    leftWrapText(ctx, `👥 : `, 715, 70, "19px Arimo", "#ff9500ff", 180, 25);
 
-    leftWrapText(ctx, star + ` ${star <= 1 ? "Star" : "Stars"}`, 625, 120, "19px Arial", "#ffff", 180, 25);
-    leftWrapText(ctx, repo + ` ${repo <= 1 ? "Repo" : "Repos"}`, 655, 120, "19px Arial", "#ffff", 180, 25);
-    leftWrapText(ctx, locate, 685, 120, "19px Arial", "#ffff", 180, 25);
-    leftWrapText(ctx, follower + ` ${follower <= 1 ? "Follower" : "Followers"}`, 715, 120, "19px Arial", "#ffff", 180, 25);
+    leftWrapText(ctx, star + ` ${star <= 1 ? "Star" : "Stars"}`, 625, 120, "19px Arimo", "#ffff", 180, 25);
+    leftWrapText(ctx, repo + ` ${repo <= 1 ? "Repo" : "Repos"}`, 655, 120, "19px Arimo", "#ffff", 180, 25);
+    leftWrapText(ctx, locate, 685, 120, "19px Arimo", "#ffff", 180, 25);
+    leftWrapText(ctx, follower + ` ${follower <= 1 ? "Follower" : "Followers"}`, 715, 120, "19px Arimo", "#ffff", 180, 25);
 
     const output = canvas.toBuffer("image/png");
         res.setHeader("Content-Type", "image/png");
@@ -165,9 +165,9 @@ async function typeTwoFunction(
         ctx.drawImage(avatarImg, AVATAR.x, AVATAR.y, AVATAR.size, AVATAR.size);
         ctx.restore();
 
-        leftWrapText(ctx, name, 100, 30, "bold 40px Arial", "#ffff", 330, 40);
-        leftWrapText(ctx, login, 123, 30, "20px Arial", "#ffff", 330, 40);
-        leftWrapText(ctx, desc, 160, 30, "24px Arial", "#ffff", 330, 25);
+        leftWrapText(ctx, name, 100, 30, "bold 40px Arimo", "#ffff", 330, 40);
+        leftWrapText(ctx, login, 123, 30, "20px Arimo", "#ffff", 330, 40);
+        leftWrapText(ctx, desc, 160, 30, "24px Arimo", "#ffff", 330, 25);
 
         const output = canvas.toBuffer("image/png");
         res.setHeader("Content-Type", "image/png");
@@ -212,9 +212,9 @@ ctx.restore();
 
 
         if (name.length >= 17) {
-            drawCenteredText(ctx, name, 560, "bold 30px Arial", "#ffd391ff", 910);
+            drawCenteredText(ctx, name, 560, "bold 30px Arimo", "#ffd391ff", 910);
         } else {
-        drawCenteredText(ctx, name, 565, "bold 40px Arial", "#ffd391ff", 910);
+        drawCenteredText(ctx, name, 565, "bold 40px Arimo", "#ffd391ff", 910);
         }
 
         const output = canvas.toBuffer("image/png");
@@ -230,6 +230,7 @@ ctx.restore();
 
 
 module.exports = { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage }
+
 
 
 
