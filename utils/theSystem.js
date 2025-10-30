@@ -87,7 +87,9 @@ async function typeOneFunction(
     const canvas = Canvas.createCanvas(width, height);
     const ctx = canvas.getContext("2d");
 
-    const template = await Canvas.loadImage("../media/image/template1.jpg");
+    const template = await Canvas.loadImage(
+  path.join(__dirname, "..", "media", "image", "template1.jpg")
+);
     ctx.drawImage(template, 0, 0, width, height);
 
     const AVATAR = { size: 362, x: -31, y: 124 };
@@ -147,7 +149,10 @@ async function typeTwoFunction(
         const canvas = Canvas.createCanvas(width, height);
         const ctx = canvas.getContext("2d");
 
-        const template = await Canvas.loadImage("../media/image/template2.jpg");
+        const template = await Canvas.loadImage(
+  path.join(__dirname, "..", "media", "image", "template2.jpg")
+);
+
         ctx.drawImage(template, 0, 0, width, height);
 
         const AVATAR = { size: 560, x: 411, y: -66 };
@@ -192,7 +197,10 @@ async function typeThreeFunction(
         const canvas = Canvas.createCanvas(width, height);
         const ctx = canvas.getContext("2d");
 
-        const template = await Canvas.loadImage("../media/image/template3.jpg");
+        const template = await Canvas.loadImage(
+  path.join(__dirname, "..", "media", "image", "template3.jpg")
+);
+
         ctx.drawImage(template, 0, 0, width, height);
 
         const AVATAR = { size: 300, x: 304, y: 202 };
@@ -222,6 +230,7 @@ ctx.restore();
 
 
 module.exports = { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage }
+
 
 
 
