@@ -166,7 +166,7 @@ async function typeTwoFunction(
         ctx.restore();
 
         leftWrapText(ctx, name, 100, 30, "bold 40px Arimo", "#ffff", 330, 40);
-        leftWrapText(ctx, login, 123, 30, "20px Arimo", "#ffff", 330, 40);
+        leftWrapText(ctx, `@` + login, 123, 30, "20px Arimo", "#ffff", 330, 40);
         leftWrapText(ctx, desc, 160, 30, "24px Arimo", "#ffff", 330, 25);
 
         const output = canvas.toBuffer("image/png");
@@ -230,6 +230,7 @@ ctx.restore();
 
 
 module.exports = { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage }
+
 
 
 
