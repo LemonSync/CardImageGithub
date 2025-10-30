@@ -12,8 +12,8 @@ const { getGithubData } = require("../utils/githubData");
 
 // =========================================
 
-Canvas.registerFont(path.join(__dirname, "..", "fonts", "arial.ttf"), {
-  family: "Arial"
+Canvas.registerFont(path.join(__dirname, "..", "fonts", "Arimo-Reguler.ttf"), {
+  family: "Arimo"
 });
 
 
@@ -56,6 +56,7 @@ app.get("/api/github-card", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
