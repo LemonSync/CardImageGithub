@@ -131,5 +131,26 @@ function drawHexagonTumpul(ctx, x, y, size) {
   ctx.clip();
 }
 
+function wrapSVGText(text, maxCharsPerLine = 25, lineHeight = 16) {
+  const words = text.split(" ");
+  const lines = [];
+  let line = "";
 
-module.exports = { drawCenteredText, drawTextBlock, wrapText, leftWrapText, rightWrapText, drawHexagonLancip, drawHexagonTumpul };
+  for (let w of words) {
+    if ((line + w).length > maxCharsPerLine) {
+      lines.push(line.trim());
+      line = w + " ";
+    } else {
+      line += w + " ";
+    }
+  }
+  if (line) lines.push(line.trim());
+
+  return lines.map((l, i) =>
+    `<tspan x="200" dy="${i === 0 ? 0 : lineHeight}">${l}</tspan>`
+  ).join("");
+}
+
+
+
+module.exports = { drawCenteredText, drawTextBlock, wrapText, leftWrapText, rightWrapText, drawHexagonLancip, drawHexagonTumpul, wrapSVGText };
