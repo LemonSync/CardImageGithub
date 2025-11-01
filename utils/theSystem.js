@@ -229,7 +229,66 @@ ctx.restore();
 }
 
 
-module.exports = { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage }
+//=======================================================================
+
+/**
+ * Generate SVG Error Card
+ * @param {string} message - Pesan utama (ex: "Error, Harap isi Username")
+ * @param {string} subtitle - Pesan tambahan (ex: "Form tidak dapat diproses sebelum username diisi")
+ * @param {number} width - Lebar SVG (default 640)
+ * @param {number} height - Tinggi SVG (default 120)
+ * @returns {string} - SVG dalam bentuk string
+ */
+function generateErrorSVG(
+  message = "Terjadi Kesalahan",
+  subtitle = "Silahkan coba lagi.",
+  width = 640,
+  height = 120
+) {
+  return `
+  <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"
+       viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title desc">
+    <title id="title">${message}</title>
+    <desc id="desc">${subtitle}</desc>
+
+    <style>
+      .bg { fill: #2b2b2b; }
+      .card { rx: 10; ry: 10; fill: #fff; filter: drop-shadow(0 6px 16px rgba(0,0,0,0.25)); }
+      .circle { fill: #ff4d4f; }
+      .excl { fill: white; font-weight: 700; font-family: Arial, Helvetica, sans-serif; }
+      .msg { font-family: "Inter", Arial, Helvetica, sans-serif; font-size: 20px; fill: #1f1f1f; font-weight: 600; }
+      .sub { font-size: 14px; fill: #666666; font-weight: 400; }
+      .pulse { transform-origin: center; animation: pulse 1.2s infinite; }
+      @keyframes pulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.06); opacity: 0.92; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+      .msg, .sub { font-synthesis: none; -webkit-font-smoothing: antialiased; }
+    </style>
+
+    <rect width="100%" height="100%" class="bg"/>
+
+    <g transform="translate(16,14)">
+      <rect width="${width - 32}" height="${height - 28}" class="card"></rect>
+
+      <g class="pulse" transform="translate(26,${height / 2})">
+        <circle class="circle" cx="0" cy="0" r="22"></circle>
+        <text class="excl" x="-7" y="8" font-size="26">!</text>
+      </g>
+
+      <g transform="translate(80,${height / 2 - 6})">
+        <text class="msg" x="0" y="0">${message}</text>
+        <text class="sub" x="0" y="26">${subtitle}</text>
+      </g>
+    </g>
+
+  </svg>`;
+}
+
+
+module.exports = { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage, generateErrorSVG }
+
 
 
 
