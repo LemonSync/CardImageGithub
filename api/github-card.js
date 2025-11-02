@@ -83,7 +83,6 @@ app.get("/api/svg-card/", async (req, res) => {
   }
 
   name = name.toUpperCase();
-  desc = wrapSVGText(desc, 50, 17);
 
   const data = await fetch(`https://api.github.com/users/${name}`)
     .then(r => r.json());
@@ -95,67 +94,85 @@ app.get("/api/svg-card/", async (req, res) => {
   const avatarBase64 = avatarBuffer.toString("base64");
 
   const svg = `
-  <svg width="400" height="600" xmlns="http://www.w3.org/2000/svg">
-    <rect width="400" height="600" fill="#216038" rx="10" />
+  <svg width="500" height="700" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="700" fill="#216038" rx="10" />
 
-    <defs>
-      <clipPath id="avatarClip">
-        <circle cx="200" cy="100" r="60" />
-      </clipPath>
+  <defs>
+    <clipPath id="avatarClip">
+      <circle cx="250" cy="100" r="60" />
+    </clipPath>
 
-      <style>
-        .glow {
-          animation: glowAnim 2.5s infinite ease-in-out;
-        }
-        @keyframes glowAnim {
-          0% { stroke: #22ff88; stroke-width: 1; }
-          50% { stroke: #00ffaa; stroke-width: 4; }
-          100% { stroke: #22ff88; stroke-width: 1; }
-        }
-      </style>
-    </defs>
+    <style>
+      .fade-in { opacity: 0; animation: fadeIn .6s forwards; }
+      .fade-up { transform-box: fill-box; transform-origin: center; opacity:0; animation: fadeInUp .6s forwards; }
+      .del-1 { animation-delay: .25s; }
+      .del-2 { animation-delay: .45s; }
+      .del-3 { animation-delay: .65s; }
 
-    <image
-      href="data:image/png;base64,${avatarBase64}"
-      x="140"
-      y="40"
-      width="120"
-      height="120"
-      clip-path="url(#avatarClip)"
-      preserveAspectRatio="xMidYMid slice"
-    />
+      @keyframes fadeIn { to { opacity: 1; } }
+      @keyframes fadeInUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
 
-    <circle cx="200" cy="100" r="60"
-            fill="none"
-            class="glow"
-            stroke-linecap="round" />
+      .glow { animation: glowAnim 2.5s infinite ease-in-out; }
+      @keyframes glowAnim {
+        0% { stroke: #22ff88; stroke-width: 1; }
+        50% { stroke: #00ffaa; stroke-width: 4; }
+        100% { stroke: #22ff88; stroke-width: 1; }
+      }
+    </style>
+  </defs>
 
-    <text x="200" y="200"
-          font-size="24"
+  <image
+    class="fade-in del-1"
+    href="data:image/png;base64,${avatarBase64}"
+    x="190"
+    y="40"
+    width="120"
+    height="120"
+    clip-path="url(#avatarClip)"
+    preserveAspectRatio="xMidYMid slice"
+  />
+
+  <circle cx="250" cy="100" r="60"
+          fill="none"
+          class="glow fade-in del-1"
+          stroke="#22ff88"
+          stroke-width="1"
+          stroke-linecap="round" />
+
+  <g class="fade-up del-2">
+    <text x="250" y="200"
+          font-size="26"
           fill="#ffffff"
           text-anchor="middle"
-          font-family="Comic Sans MS, sans-serif"
+          font-family="Comic Sans MS, cursive, sans-serif"
           text-transform="uppercase"
-          letter-spacing="3">
+          letter-spacing="6">
       ${name}
     </text>
+  </g>
 
-    <text x="200" y="230"
-          fill="#e5e7eb"
-          text-anchor="middle"
-          font-family="Inter, sans-serif"
-          font-size="14">
-      ${desc}
-    </text>
+  <g class="fade-up del-3">
+    <text x="250" y="230"
+      text-anchor="middle"
+      fill="#ffffff"
+      font-family="Ubuntu, sans-serif"
+      font-weight="100">
+  ${wrapSVGText(desc, 50, 20, 250)}
+</text>
 
-    <rect x="-400" y="580" width="400" height="6" fill="#00ff88">
-      <animate attributeName="x"
-               from="-400"
-               to="400"
-               dur="2.8s"
-               repeatCount="indefinite" />
-    </rect>
-  </svg>
+  </g>
+
+  <rect x="-500" y="680" width="500" height="6" fill="#00ff88">
+    <animate attributeName="x"
+             from="-500"
+             to="500"
+             dur="1s"
+             repeatCount="indefinite" />
+  </rect>
+</svg>
   `;
 
   res.setHeader("Content-Type", "image/svg+xml");
@@ -163,6 +180,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
