@@ -131,7 +131,7 @@ function drawHexagonTumpul(ctx, x, y, size) {
   ctx.clip();
 }
 
-function wrapSVGText(text, maxCharsPerLine = 30, lineHeight = 20, centerX = 250) {
+function wrapSVGText(text, maxCharsPerLine = 25, lineHeight = 16) {
   const words = text.split(" ");
   const lines = [];
   let line = "";
@@ -147,11 +147,12 @@ function wrapSVGText(text, maxCharsPerLine = 30, lineHeight = 20, centerX = 250)
   if (line) lines.push(line.trim());
 
   return lines.map((l, i) =>
-    `<tspan x="${centerX}" dy="${i === 0 ? 0 : lineHeight}">${l}</tspan>`
+    `<tspan x="300" dy="${i === 0 ? 0 : lineHeight}">${l}</tspan>`
   ).join("");
 }
 
 
 
 module.exports = { drawCenteredText, drawTextBlock, wrapText, leftWrapText, rightWrapText, drawHexagonLancip, drawHexagonTumpul, wrapSVGText };
+
 
