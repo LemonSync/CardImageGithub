@@ -67,8 +67,6 @@ app.get("/api/github-card", async (req, res) => {
 app.get("/api/svg-card/", async (req, res) => {
   let { name, desc } = req.query;
 
-  const github = await getGithubData(name);
-
   if (!name) {
   const errorSvg = generateErrorSVG(
     "Error, Harap isi Username",
@@ -78,6 +76,8 @@ app.get("/api/svg-card/", async (req, res) => {
   res.setHeader("Content-Type", "image/svg+xml");
   return res.send(errorSvg);
 }
+
+  const github = await getGithubData(name);
 
 
   if (!desc) {
@@ -213,7 +213,7 @@ app.get("/api/svg-card/", async (req, res) => {
 
 
   <image
-    href="data:image/png;base64,./profile"
+    href="data:image/png;base64,${avatarBase64}"
     x="240"
     y="40"
     width="120"
@@ -306,6 +306,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
