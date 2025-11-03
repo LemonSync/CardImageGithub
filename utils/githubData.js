@@ -48,18 +48,20 @@ async function getGithubData(username) {
   }
 
   return {
-    name: user.name || "No Name",
-    login: user.login,
-    desc: user.bio || "No Bio",
-    locate: user.location || "No Location",
-    follower: user.followers || 0,
-    avatar_url: user.avatar_url,
-    totalStars,
-    totalRepos,
-    totalPullRequests,
-    totalIssues,
-  };
+  name: user.name ?? user.login,
+  login: user.login,
+  bio: user.bio ?? "No bio provided",
+  location: user.location ?? "Unknown",
+  followers: user.followers ?? 0,
+  avatar_url: user.avatar_url,
+  totalStars,
+  totalRepos,
+  totalPullRequests,
+  totalIssues,
+};
+
 }
 
 module.exports = { getGithubData };
+
 
