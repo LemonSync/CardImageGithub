@@ -248,7 +248,7 @@ app.get("/api/svg-card/", async (req, res) => {
         fill="#FFFF"
         font-family="Ubuntu, sans-serif"
         class="fade-up del-star">
-    ⭐: ${github.totalStar} ${github.totalStar <= 1 ? "Star" : "Stars"}
+    ⭐: ${github.totalStars} ${github.totalStars <= 1 ? "Star" : "Stars"}
   </text>
 
   <text x="30" y="590"
@@ -306,6 +306,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
