@@ -234,7 +234,7 @@ app.get("/api/svg-card/", async (req, res) => {
   </clipPath>
 
   <image
-    href="https"
+    href="data:image/png;base64,${avatarBase64}"
     x="240"
     y="40"
     width="120"
@@ -402,6 +402,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
