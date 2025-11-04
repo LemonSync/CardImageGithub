@@ -229,6 +229,21 @@ ctx.restore();
 }
 
 
+function escapeXML(str = "") {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function svgMultiline(text, lineHeight = 18) {
+  return escapeXML(text)
+    .split('\n')
+    .map((line, i) => `<tspan x="0" dy="${i === 0 ? 0 : lineHeight}">${line}</tspan>`)
+    .join('');
+}
+
+
 //=======================================================================
 
 /**
@@ -239,17 +254,23 @@ ctx.restore();
  * @param {number} height - Tinggi SVG (default 120)
  * @returns {string} - SVG dalam bentuk string
  */
+
 function generateErrorSVG(
   message = "Terjadi Kesalahan",
   subtitle = "Silahkan coba lagi.",
-  width = 640,
+  desc = "Jika masalah berlanjut, lapor ke repo.",
+  width = 950,
   height = 120
 ) {
+  const uid = Date.now().toString(36);
+  const titleId = `title-${uid}`;
+  const descId = `desc-${uid}`;
+
   return `
   <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"
-       viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title desc">
-    <title id="title">${message}</title>
-    <desc id="desc">${subtitle}</desc>
+       viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="${titleId} ${descId}">
+    <title id="${titleId}">${escapeXML(message)}</title>
+    <desc id="${descId}">${escapeXML(subtitle)}</desc>
 
     <style>
       .bg { fill: #2b2b2b; }
@@ -278,8 +299,9 @@ function generateErrorSVG(
       </g>
 
       <g transform="translate(80,${height / 2 - 6})">
-        <text class="msg" x="0" y="0">${message}</text>
-        <text class="sub" x="0" y="26">${subtitle}</text>
+        <text class="msg" x="0" y="-25">${svgMultiline(message)}</text>
+        <text class="sub" x="0" y="-5">${svgMultiline(subtitle)}</text>
+        <text class="sub" x="0" y="20">${svgMultiline(desc)}</text>
       </g>
     </g>
 
@@ -287,13 +309,6 @@ function generateErrorSVG(
 }
 
 
+
+
 module.exports = { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage, generateErrorSVG }
-
-
-
-
-
-
-
-
-
