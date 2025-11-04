@@ -76,6 +76,7 @@ app.get("/api/svg-card/", async (req, res) => {
     1150,
     160
   );
+}
 
   const github = await getGithubData(name);
     if (github.error) {
@@ -401,6 +402,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
