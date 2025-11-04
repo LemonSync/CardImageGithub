@@ -68,7 +68,7 @@ app.get("/api/svg-card/", async (req, res) => {
 
   let { name, desc, age, study, religion, job, number, email, hobby } = req.query;
 
-  if (!name || !age || !study || !religion || !job || !number || !email || !hobby) {
+  if (!name || age === undefined || study === undefined || religion === undefined || job === undefined || number === undefined || email === undefined || hobby === undefined) {
   const errorSvg = generateErrorSVG(
     "Error, Please fill in Username, Age, Study, Religion, Job, Number, Email, and Hobby.\n",
     "The form cannot be processed before the username is filled in.",
@@ -402,6 +402,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
