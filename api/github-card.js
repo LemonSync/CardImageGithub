@@ -81,7 +81,7 @@ app.get("/api/svg-card/", async (req, res) => {
   const github = await getGithubData(name);
     if (github.error) {
   console.log("Error:", github.status + " " + github.message);
-  return res.send(generateErrorSVG("User tidak ditemukan!"));
+  return res.send(generateErrorSVG("User not found!", "Your github name is not found", "Are you typo ? Use your name for login btw..."));
 }
 
 
@@ -402,6 +402,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
