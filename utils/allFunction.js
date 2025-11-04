@@ -151,8 +151,12 @@ function wrapSVGText(text, maxCharsPerLine = 25, lineHeight = 16) {
   ).join("");
 }
 
+function capitalize(str = "") {
+  str = str.toLowerCase()
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
+module.exports = { drawCenteredText, drawTextBlock, wrapText, leftWrapText, rightWrapText, drawHexagonLancip, drawHexagonTumpul, wrapSVGText, capitalize };
 
-module.exports = { drawCenteredText, drawTextBlock, wrapText, leftWrapText, rightWrapText, drawHexagonLancip, drawHexagonTumpul, wrapSVGText };
 
 
