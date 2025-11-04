@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 
 const { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage, generateErrorSVG } = require("../utils/theSystem");
-const { wrapSVGText } = require("../utils/allFunction");
+const { wrapSVGText, capitalize } = require("../utils/allFunction");
 const { getGithubData } = require("../utils/githubData");
 
 // =========================================
@@ -65,19 +65,23 @@ app.get("/api/github-card", async (req, res) => {
 });
 
 app.get("/api/svg-card/", async (req, res) => {
-  let { name, desc } = req.query;
 
-  if (!name) {
+  let { name, desc, age, study, religion, job, number, email, hobby } = req.query;
+
+  if (!name || !age || !study || !religion || !job || !number || !email || !hobby) {
   const errorSvg = generateErrorSVG(
-    "Error, Harap isi Username",
-    "Form tidak dapat diproses sebelum username diisi."
+    "Error, Please fill in Username, Age, Study, Religion, Job, Number, Email, and Hobby.\n",
+    "The form cannot be processed before the username is filled in.",
+    "Example: /api/svg-card?name=YourName&age=YourAge&study=YourStudy&religion=YourReligion&job=YourJob&number=YourNumber&email=YourEmail&hobby=YourHobby\nParameters: name, desc(not mandatory) age, study, religion, job, number, email, hobby",
+    1150,
+    160
   );
 
-  res.setHeader("Content-Type", "image/svg+xml");
-  return res.send(errorSvg);
-}
-
   const github = await getGithubData(name);
+    if (github.error) {
+  console.log("Error:", github.status + " " + github.message);
+  return res.send(generateErrorSVG("User tidak ditemukan!"));
+}
 
 
   if (!desc) {
@@ -397,6 +401,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
