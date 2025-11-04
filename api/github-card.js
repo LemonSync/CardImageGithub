@@ -68,7 +68,7 @@ app.get("/api/svg-card/", async (req, res) => {
 
   let { name, desc, age, study, religion, job, number, email, hobby } = req.query;
 
-  if (!name || age === undefined || study === undefined || religion === undefined || job === undefined || number === undefined || email === undefined || hobby === undefined) {
+  if (!name || !age || !study || !religion || !job || !number || !email || !hobby) {
   const errorSvg = generateErrorSVG(
     "Error, Please fill in Username, Age, Study, Religion, Job, Number, Email, and Hobby.\n",
     "The form cannot be processed before the username is filled in.",
@@ -76,11 +76,14 @@ app.get("/api/svg-card/", async (req, res) => {
     1150,
     160
   );
+  res.setHeader("Content-Type", "image/svg+xml");
+  return res.send(errorSvg);
 }
 
   const github = await getGithubData(name);
     if (github.error) {
   console.log("Error:", github.status + " " + github.message);
+  res.setHeader("Content-Type", "image/svg+xml");
   return res.send(generateErrorSVG("User not found!", "Your github name is not found", "Are you typo ? Use your name for login btw..."));
 }
 
@@ -89,11 +92,10 @@ app.get("/api/svg-card/", async (req, res) => {
     desc = "Saya adalah seseorang yang misterius dan kejam, yang akan segera memakan kamu diam diam, berwaspadalah akan kedatanganku .....";
   }
 
+  name = github.name;
   name = name.toUpperCase();
   desc = wrapSVGText(desc, 50, 17);
 
-
-  name = github.name;
 
   const avatarBuffer = await fetch(github.avatar_url)
     .then(r => r.arrayBuffer())
@@ -402,6 +404,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
