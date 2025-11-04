@@ -305,7 +305,7 @@ app.get("/api/svg-card/", async (req, res) => {
         class="fade-up del-religion"
         font-size="14">Religion: ${religion}</text>
 
-  <text x="380" y="340"
+  <text x="315" y="340"
         text-anchor="start"
         font-family="Ubuntu, sans-serif"
         fill="#9b9b9bff"
@@ -313,28 +313,28 @@ app.get("/api/svg-card/", async (req, res) => {
         font-weight="bold"
         font-size="16">More Info</text>
 
-  <text x="395" y="370"
+  <text x="340" y="370"
         text-anchor="start"
         font-family="Ubuntu, sans-serif"
         fill="#ffffffff"
         class="fade-up del-job"
         font-size="14">Job: ${job}</text>
 
-  <text x="395" y="395"
+  <text x="340" y="395"
         text-anchor="start"
         font-family="Ubuntu, sans-serif"
         fill="#ffffffff"
         class="fade-up del-number"
         font-size="14">Number: +${number}</text>
 
-  <text x="395" y="420"
+  <text x="340" y="420"
         text-anchor="start"
         font-family="Ubuntu, sans-serif"
         fill="#ffffffff"
         class="fade-up del-email"
         font-size="14">Gmail: ${email}</text>
 
-  <text x="395" y="445"
+  <text x="340" y="445"
         text-anchor="start"
         font-family="Ubuntu, sans-serif"
         fill="#ffffffff"
@@ -404,6 +404,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
