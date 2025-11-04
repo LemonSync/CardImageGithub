@@ -151,12 +151,23 @@ app.get("/api/svg-card/", async (req, res) => {
       .del-3 { animation-delay: 14s; }
 
 
-      .del-star { animation-delay: 14.55s; }
-      .del-repo { animation-delay: 14.65s; }
-      .del-issue { animation-delay: 14.75s; }
-      .del-loc { animation-delay: 14.85s; }
-      .del-pull { animation-delay: 14.95s; }
-      .del-follow { animation-delay: 15.05s; }
+      .del-mainAbout { animation-delay: 14.55s; }
+      .del-name { animation-delay: 14.65s; }
+      .del-age { animation-delay: 14.75s; }
+      .del-study { animation-delay: 14.85s; }
+      .del-religion { animation-delay: 14.95s; }
+      .del-moreInfo { animation-delay: 15.05s; }
+      .del-job { animation-delay: 15.15s; }
+      .del-number { animation-delay: 15.25s; }
+      .del-email { animation-delay: 15.35s; }
+      .del-hobby { animation-delay: 15.45s; }
+
+      .del-star { animation-delay: 15.6s; }
+      .del-repo { animation-delay: 15.7s; }
+      .del-issue { animation-delay: 15.8s; }
+      .del-loc { animation-delay: 15.9s; }
+      .del-pull { animation-delay: 16s; }
+      .del-follow { animation-delay: 16.1s; }
 
       @keyframes fadeIn {
         from { opacity: 0; }
@@ -212,8 +223,13 @@ app.get("/api/svg-card/", async (req, res) => {
   <polygon points="48,60 551,60 551,50 48,50" fill="#00ff88ff" class="fade-in del-lineBox5"/>
 
 
+  <g transform="translate(135,56)" class="fade-up del-1">
+  <clipPath id="avclip">
+    <circle cx="300" cy="100" r="60"/>
+  </clipPath>
+
   <image
-    href="data:image/png;base64,${avatarBase64}"
+    href="https"
     x="240"
     y="40"
     width="120"
@@ -223,10 +239,13 @@ app.get("/api/svg-card/", async (req, res) => {
     class="fade-up del-1"
   />
 
-  <circle cx="300" cy="100" r="60"
-          fill="none"
-          class="glow fade-up del-1"
-          stroke-linecap="round" />
+  <circle cx="300" cy="100" r="60" class="glow"
+          fill="none" stroke="#00000040" stroke-width="2"/>
+  </g>
+  
+  <circle cx="300" cy="100" r="90"
+          fill="white"
+          class="glow fade-up del-1"/>
 
   <text x="300" y="200" font-size="24"
         text-anchor="middle"
@@ -234,7 +253,7 @@ app.get("/api/svg-card/", async (req, res) => {
         fill="#FFFF"
         class="fade-up del-2"
         letter-spacing="5"
-        font-weight="600">${name.toUpperCase()}</text>
+        font-weight="600">${name}</text>
 
   <text x="300" y="240"
         text-anchor="middle"
@@ -242,6 +261,78 @@ app.get("/api/svg-card/", async (req, res) => {
         fill="#FFFF"
         class="fade-up del-3"
         font-size="14">${desc}</text>
+
+  <text x="25" y="340"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#9b9b9bff"
+        class="fade-up del-mainAbout"
+        font-weight="bold"
+        font-size="16">Main About</text>
+
+  <text x="40" y="370"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-name"
+        font-size="14">Name: ${capitalize(name)}</text>
+
+  <text x="40" y="395"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-age"
+        font-size="14">Age: ${age}</text>
+
+  <text x="40" y="420"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-study"
+        font-size="14">Study: ${study}</text>
+
+  <text x="40" y="445"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-religion"
+        font-size="14">Religion: ${religion}</text>
+
+  <text x="380" y="340"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#9b9b9bff"
+        class="fade-up del-moreInfo"
+        font-weight="bold"
+        font-size="16">More Info</text>
+
+  <text x="395" y="370"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-job"
+        font-size="14">Job: ${job}</text>
+
+  <text x="395" y="395"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-number"
+        font-size="14">Number: +${number}</text>
+
+  <text x="395" y="420"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-email"
+        font-size="14">Gmail: ${email}</text>
+
+  <text x="395" y="445"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-hobby"
+        font-size="14">Hobby: ${hobby}</text>
 
   <text x="30" y="570"
         font-size="15px"
@@ -306,6 +397,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
