@@ -34,7 +34,7 @@ function wrapSVGTextCentered(text, maxCharsPerLine = 25, lineHeight = 16, svgHei
   if (line) lines.push(line.trim());
 
   const totalHeight = lines.length * lineHeight;
-  const startY = (svgHeight - totalHeight) / 2; // posisi vertikal awal
+  const startY = (svgHeight - totalHeight) / 2;
 
   return lines.map((l, i) =>
     `<tspan x="${svgWidth / 2}" dy="${i === 0 ? startY : lineHeight}" text-anchor="middle">${l}</tspan>`
@@ -51,3 +51,4 @@ function capitalize(str = "") {
 
 
 module.exports = { wrapSVGText, wrapSVGTextCentered, capitalize };
+
