@@ -1,233 +1,4 @@
-const { drawCenteredText, drawTextBlock, wrapText, leftWrapText, rightWrapText, drawHexagonLancip, drawHexagonTumpul } = require("./allFunction");
-const Canvas = require("canvas");
-const path = require("path");
-
-//============================================================
-
-Canvas.registerFont(path.join(__dirname, "..", "fonts", "Arimo-Regular.ttf"), {
-  family: "Arimo"
-});
-
-
-function errorMessage(
-    res,
-    Canvas,
-    err
-) {
-
-    const width = 700;
-    const height = 400;
-    const canvas = Canvas.createCanvas(700, 400);
-    const ctx = canvas.getContext("2d");
-            
-    ctx.fillStyle = "#00870dff";
-    ctx.fillRect(0, 0, width / 2, height);
-    ctx.fillStyle = "#005709ff";
-    ctx.fillRect(width / 2, 0, width, height);
-            
-    leftWrapText(ctx, `Some error, Please visit the repo github.com/LemonSync/repositori and give issue, Lemon gonna fix it` + `\n\n-Lemon`, 180, 18, "bold 20px Arimo", "#005709ff", 330, 25);
-    rightWrapText(ctx, `The Error:  ` + err.message + `\n\n- Lemon`, 180, width - 18, "bold 20px Arimo", "#00e016ff", 330, 25);
-            
-    const output = canvas.toBuffer("image/png");
-    res.setHeader("Content-Type", "image/png");
-    res.send(output);
-
-}
-
-//=============================================================
-
-function SpecialErrorMessage(
-    res,
-    Canvas,
-    text = String
-) {
-
-    const width = 700;
-    const height = 400;
-    const canvas = Canvas.createCanvas(700, 400);
-    const ctx = canvas.getContext("2d");
-            
-    ctx.fillStyle = "#00870dff";
-    ctx.fillRect(0, 0, width / 2, height);
-    ctx.fillStyle = "#005709ff";
-    ctx.fillRect(width / 2, 0, width, height);
-            
-    leftWrapText(ctx, text, 180, 18, "bold 20px Arimo", "#005709ff", 330, 25);
-    rightWrapText(ctx, `-Lemon`, 180, width - 18, "bold 20px Arimo", "#00e016ff", 330, 25);
-            
-    const output = canvas.toBuffer("image/png");
-    res.setHeader("Content-Type", "image/png");
-    return res.send(output);
-
-}
-
-//==============================================================
-
-async function typeOneFunction(
-    res,
-    Canvas,
-    profile = path,
-    name = String,
-    login = String,
-    desc = String,
-    twitter = String,
-    facebook = String,
-    no = String,
-    star = Number,
-    repo = Number,
-    locate = String,
-    follower = Number
-) {
-        try {
-            
-    const width = 736;
-    const height = 736;
-    const avatarImg = await Canvas.loadImage(profile);
-
-    const canvas = Canvas.createCanvas(width, height);
-    const ctx = canvas.getContext("2d");
-
-    const template = await Canvas.loadImage(
-  path.join(__dirname, "..", "media", "image", "template1.jpg")
-);
-    ctx.drawImage(template, 0, 0, width, height);
-
-    const AVATAR = { size: 362, x: -31, y: 124 };
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(AVATAR.x + AVATAR.size / 2, AVATAR.y + AVATAR.size / 2, AVATAR.size / 2, 0, Math.PI * 2);
-    ctx.closePath();
-    ctx.clip();
-    ctx.drawImage(avatarImg, AVATAR.x, AVATAR.y, AVATAR.size, AVATAR.size);
-    ctx.restore();
-
-    leftWrapText(ctx, name, 160, 380, "bold 40px Arimo", "#ffff", 330, 40);
-    leftWrapText(ctx, login, 180, 380, "20px Arimo", "#ffff", 330, 40);
-    leftWrapText(ctx, desc, 220, 380, "24px Arimo", "#ffff", 330, 25);
-
-    leftWrapText(ctx, `@` + twitter, 615, 550, "19px Arimo", "#ffff", 180, 25);
-    leftWrapText(ctx, `@` + facebook, 660, 550, "19px Arimo", "#ffff", 180, 25);
-    leftWrapText(ctx, no, 705, 550, "19px Arimo", "#ffff", 180, 25);
-
-    leftWrapText(ctx, `⭐ : `, 625, 70, "19px Arimo", "#ff9500ff", 180, 25);
-    leftWrapText(ctx, `📦 : `, 655, 70, "19px Arimo", "#ff9500ff", 180, 25);
-    leftWrapText(ctx, `🏠 : `, 685, 70, "19px Arimo", "#ff9500ff", 180, 25);
-    leftWrapText(ctx, `👥 : `, 715, 70, "19px Arimo", "#ff9500ff", 180, 25);
-
-    leftWrapText(ctx, star + ` ${star <= 1 ? "Star" : "Stars"}`, 625, 120, "19px Arimo", "#ffff", 180, 25);
-    leftWrapText(ctx, repo + ` ${repo <= 1 ? "Repo" : "Repos"}`, 655, 120, "19px Arimo", "#ffff", 180, 25);
-    leftWrapText(ctx, locate, 685, 120, "19px Arimo", "#ffff", 180, 25);
-    leftWrapText(ctx, follower + ` ${follower <= 1 ? "Follower" : "Followers"}`, 715, 120, "19px Arimo", "#ffff", 180, 25);
-
-    const output = canvas.toBuffer("image/png");
-        res.setHeader("Content-Type", "image/png");
-        res.send(output);
-
-    } catch (err) {
-    
-            errorMessage(res, Canvas, err);
-    
-    }
-}
-
-//=======================================================================
-
-async function typeTwoFunction(
-    res,
-    Canvas,
-    profile = path,
-    name = String,
-    login = String,
-    desc = String
-) {
-        try {
-
-        const width = 736;
-        const height = 420;
-        const avatarImg = await Canvas.loadImage(profile);
-
-        const canvas = Canvas.createCanvas(width, height);
-        const ctx = canvas.getContext("2d");
-
-        const template = await Canvas.loadImage(
-  path.join(__dirname, "..", "media", "image", "template2.jpg")
-);
-
-        ctx.drawImage(template, 0, 0, width, height);
-
-        const AVATAR = { size: 560, x: 411, y: -66 };
-
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(AVATAR.x + AVATAR.size / 2, AVATAR.y + AVATAR.size / 2, AVATAR.size / 2, 0, Math.PI * 2);
-        ctx.closePath();
-        ctx.clip();
-        ctx.drawImage(avatarImg, AVATAR.x, AVATAR.y, AVATAR.size, AVATAR.size);
-        ctx.restore();
-
-        leftWrapText(ctx, name, 100, 30, "bold 40px Arimo", "#ffff", 330, 40);
-        leftWrapText(ctx, `@` + login, 123, 30, "20px Arimo", "#ffff", 330, 40);
-        leftWrapText(ctx, desc, 160, 30, "24px Arimo", "#ffff", 330, 25);
-
-        const output = canvas.toBuffer("image/png");
-        res.setHeader("Content-Type", "image/png");
-        res.send(output);
-
-        } catch (err) {
-            
-        errorMessage(res, Canvas, err);
-
-        }
-}
-
-async function typeThreeFunction(
-    res,
-    Canvas,
-    profile = path,
-    name = String,
-    login = String,
-    desc = String
-) {
-        try {
-
-        const width = 736;
-        const height = 736;
-        const avatarImg = await Canvas.loadImage(profile);
-
-        const canvas = Canvas.createCanvas(width, height);
-        const ctx = canvas.getContext("2d");
-
-        const template = await Canvas.loadImage(
-  path.join(__dirname, "..", "media", "image", "template3.jpg")
-);
-
-        ctx.drawImage(template, 0, 0, width, height);
-
-        const AVATAR = { size: 300, x: 304, y: 202 };
-
-        ctx.save();
-drawHexagonTumpul(ctx, AVATAR.x, AVATAR.y, AVATAR.size);
-ctx.drawImage(avatarImg, AVATAR.x, AVATAR.y, AVATAR.size, AVATAR.size);
-ctx.restore();
-
-
-        if (name.length >= 17) {
-            drawCenteredText(ctx, name, 560, "bold 30px Arimo", "#ffd391ff", 910);
-        } else {
-        drawCenteredText(ctx, name, 565, "bold 40px Arimo", "#ffd391ff", 910);
-        }
-
-        const output = canvas.toBuffer("image/png");
-        res.setHeader("Content-Type", "image/png");
-        res.send(output);
-
-        } catch (err) {
-            
-        errorMessage(res, Canvas, err);
-
-        }
-}
-
+const { wrapSVGText, capitalize } = require("./allFunction");
 
 function escapeXML(str = "") {
   return String(str)
@@ -244,7 +15,6 @@ function svgMultiline(text, lineHeight = 18) {
 }
 
 
-//=======================================================================
 
 /**
  * Generate SVG Error Card
@@ -294,8 +64,8 @@ function generateErrorSVG(
       <rect width="${width - 32}" height="${height - 28}" class="card"></rect>
 
       <g class="pulse" transform="translate(26,${height / 2})">
-        <circle class="circle" cx="0" cy="0" r="22"></circle>
-        <text class="excl" x="-7" y="8" font-size="26">!</text>
+        <circle class="circle" cx="20" cy="9" r="22"></circle>
+        <text class="excl" x="15" y="16" font-size="26">!</text>
       </g>
 
       <g transform="translate(80,${height / 2 - 6})">
@@ -311,4 +81,349 @@ function generateErrorSVG(
 
 
 
-module.exports = { typeOneFunction, typeTwoFunction, typeThreeFunction, SpecialErrorMessage, generateErrorSVG }
+
+/**
+ * Generate SVG Card
+ * @param {string} name - The Github account name
+ * @param {string} desc - The Description or Bio
+ * @param {number} age - The Age.
+ * @param {string} study - The Study.
+ * @param {number} religion - The religion.
+ * @param {string} job - The Job
+ * @param {number} number - The phone number
+ * @param {string} email - The email
+ * @param {string} hobby - The Hobby
+ * @param {number} totalStars - Github Star
+ * @param {number} totalRepos - Github Repositories
+ * @param {number} totalIssues - Github Issue
+ * @param {string} location - The Adress
+ * @param {number} totalPullRequests - Github Pull Request
+ * @param {number} followers - Github Follower
+ * @returns {string} - SVG dalam bentuk string
+ */
+
+function generateSVG(
+  name = "Not Found",
+  desc = wrapSVGText("Orang yang pengen jadi programmer handal tapi enggan ngoding", 50, 17),
+  age = 18,
+  study = "S1 IT",
+  religion = "Private",
+  job = "None",
+  number = 6282172175234,
+  email = "Private",
+  hobby = "Coding",
+  totalStars = 0,
+  totalRepos = 0,
+  totalIssues = 0,
+  location = "Unknow",
+  totalPullRequests = 0,
+  followers = 0
+) {
+
+  const uid = Date.now().toString(36);
+  const titleId = `title-${uid}`;
+  const descId = `desc-${uid}`;
+
+  const svg = `
+<svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
+  <title id="${titleId}">${escapeXML("Lemon Card - SVG Card")}</title>
+  <desc id="${descId}">${escapeXML("LemonSync")}</desc>
+  <rect width="600" height="600" fill="#216038" />
+
+  <defs>
+    <clipPath id="avatarClip">
+      <circle cx="300" cy="100" r="60" />
+    </clipPath>
+
+    <style>
+      .fade-up {
+        transform-box: fill-box;
+        transform-origin: center;
+        opacity: 0;
+        animation: fadeUp 0.6s forwards ease-out;
+      }
+
+      .fade-in { opacity: 0; animation: fadeIn 1s forwards; }
+
+      .del-box1 { animation-delay: 0.5s; }
+      .del-box2 { animation-delay: 1s; }
+      .del-box3 { animation-delay: 1.5s; }
+      .del-box4 { animation-delay: 2s; }
+      .del-box5 { animation-delay: 2.5s; }
+      .del-box6 { animation-delay: 3s; }
+      .del-box7 { animation-delay: 3.5s; }
+      .del-box8 { animation-delay: 4s; }
+      .del-box9 { animation-delay: 4.5s; }
+      .del-box10 { animation-delay: 5s; }
+
+      .del-line1 { animation-delay: 5.5s; }
+      .del-line2 { animation-delay: 6s; }
+      .del-lineBox1 { animation-delay: 6.5s; }
+
+      .del-line3 { animation-delay: 7s; }
+      .del-line4 { animation-delay: 7.5s; }
+      .del-lineBox2 { animation-delay: 8s; }
+
+      .del-line5 { animation-delay: 8.5s; }
+      .del-line6 { animation-delay: 9s; }
+      .del-lineBox3 { animation-delay: 9.5s; }
+
+      .del-line7 { animation-delay: 10s; }
+      .del-line8 { animation-delay: 10.5s; }
+      .del-lineBox4 { animation-delay: 11s; }
+
+      .del-line9 { animation-delay: 11.5s; }
+      .del-line10 { animation-delay: 12s; }
+      .del-lineBox5 { animation-delay: 12.5s; }
+
+      .del-1 { animation-delay: 13s; }
+      .del-2 { animation-delay: 13.5s; }
+      .del-3 { animation-delay: 14s; }
+
+
+      .del-mainAbout { animation-delay: 14.55s; }
+      .del-name { animation-delay: 14.65s; }
+      .del-age { animation-delay: 14.75s; }
+      .del-study { animation-delay: 14.85s; }
+      .del-religion { animation-delay: 14.95s; }
+      .del-moreInfo { animation-delay: 15.05s; }
+      .del-job { animation-delay: 15.15s; }
+      .del-number { animation-delay: 15.25s; }
+      .del-email { animation-delay: 15.35s; }
+      .del-hobby { animation-delay: 15.45s; }
+
+      .del-star { animation-delay: 15.6s; }
+      .del-repo { animation-delay: 15.7s; }
+      .del-issue { animation-delay: 15.8s; }
+      .del-loc { animation-delay: 15.9s; }
+      .del-pull { animation-delay: 16s; }
+      .del-follow { animation-delay: 16.1s; }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes fadeUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+
+      .glow {
+        animation: glowAnim 2.5s infinite ease-in-out;
+      }
+      @keyframes glowAnim {
+        0% { stroke: #22ff88; stroke-width: 1; }
+        50% { stroke: #00ffaa; stroke-width: 4; }
+        100% { stroke: #22ff88; stroke-width: 1; }
+      }
+    </style>
+  </defs>
+
+  <polygon points="10,10 100,10 100,100 10,100" fill="#004726ff" class="fade-in del-box1"/>
+  <polygon points="20,20 90,20 90,90 20,90" fill="#007840ff" class="fade-in del-box2"/>
+  <polygon points="30,30 80,30 80,80 30,80" fill="#00a458ff" class="fade-in del-box3"/>
+  <polygon points="40,40 70,40 70,70 40,70" fill="#00d170ff" class="fade-in del-box4"/>
+  <polygon points="50,50 60,50 60,60 50,60" fill="#00ff88ff" class="fade-in del-box5"/>
+
+  <polygon points="500,10 590,10 590,100 500,100" fill="#004726ff" class="fade-in del-box6"/>
+  <polygon points="510,20 580,20 580,90 510,90" fill="#007840ff" class="fade-in del-box7"/>
+  <polygon points="520,30 570,30 570,80 520,80" fill="#00a458ff" class="fade-in del-box8"/>
+  <polygon points="530,40 560,40 560,70 530,70" fill="#00d170ff" class="fade-in del-box9"/>
+  <polygon points="540,50 550,50 550,60 540,60" fill="#00ff88ff" class="fade-in del-box10"/>
+
+  <line x1="100" y1="10" x2="500" y2="10" stroke="#004726ff" stroke-width="1" class="fade-in del-line1"/>
+  <line x1="100" y1="100" x2="500" y2="100" stroke="#004726ff" stroke-width="1" class="fade-in del-line2"/>
+  <polygon points="98,10 501,10 501,100 98,100" fill="#004726ff" class="fade-in del-lineBox1"/>
+
+  <line x1="90" y1="20" x2="510" y2="20" stroke="#007840ff" stroke-width="1" class="fade-in del-line3"/>
+  <line x1="90" y1="90" x2="510" y2="90" stroke="#007840ff" stroke-width="1" class="fade-in del-line4"/>
+  <polygon points="88,20 511,20 511,90 88,90" fill="#007840ff" class="fade-in del-lineBox2"/>
+
+  <line x1="80" y1="30" x2="520" y2="30" stroke="#00a458ff" stroke-width="1" class="fade-in del-line5"/>
+  <line x1="80" y1="80" x2="520" y2="80" stroke="#00a458ff" stroke-width="1" class="fade-in del-line6"/>
+  <polygon points="78,30 521,30 521,80 78,80" fill="#00a458ff" class="fade-in del-lineBox3"/>
+
+  <line x1="70" y1="40" x2="530" y2="40" stroke="#00d170ff" stroke-width="1" class="fade-in del-line7"/>
+  <line x1="70" y1="70" x2="530" y2="70" stroke="#00d170ff" stroke-width="1" class="fade-in del-line8"/>
+  <polygon points="68,40 531,40 531,70 68,70" fill="#00d170ff" class="fade-in del-lineBox4"/>
+
+  <line x1="60" y1="50" x2="540" y2="50" stroke="#00ff88ff" stroke-width="1" class="fade-in del-line9"/>
+  <line x1="60" y1="60" x2="540" y2="60" stroke="#00ff88ff" stroke-width="1" class="fade-in del-line10"/>
+  <polygon points="48,60 551,60 551,50 48,50" fill="#00ff88ff" class="fade-in del-lineBox5"/>
+
+
+  <g transform="translate(135,56)" class="fade-up del-1">
+  <clipPath id="avclip">
+    <circle cx="300" cy="100" r="60"/>
+  </clipPath>
+
+  <image
+    href="https"
+    x="240"
+    y="40"
+    width="120"
+    height="120"
+    clip-path="url(#avatarClip)"
+    preserveAspectRatio="xMidYMid slice"
+    class="fade-up del-1"
+  />
+
+  <circle cx="300" cy="100" r="60" class="glow"
+          fill="none" stroke="#00000040" stroke-width="2"/>
+  </g>
+  
+  <circle cx="300" cy="100" r="90"
+          fill="white"
+          class="glow fade-up del-1"/>
+
+  <text x="300" y="200" font-size="24"
+        text-anchor="middle"
+        font-family="Ubuntu, sans-serif"
+        fill="#FFFF"
+        class="fade-up del-2"
+        letter-spacing="5"
+        font-weight="600">${name}</text>
+
+  <text x="300" y="240"
+        text-anchor="middle"
+        font-family="Ubuntu, sans-serif"
+        fill="#FFFF"
+        class="fade-up del-3"
+        font-size="14">${desc}</text>
+
+  <text x="25" y="340"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#9b9b9bff"
+        class="fade-up del-mainAbout"
+        font-weight="bold"
+        font-size="16">Main About</text>
+
+  <text x="40" y="370"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-name"
+        font-size="14">Name: ${capitalize(name)}</text>
+
+  <text x="40" y="395"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-age"
+        font-size="14">Age: ${age}</text>
+
+  <text x="40" y="420"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-study"
+        font-size="14">Study: ${study}</text>
+
+  <text x="40" y="445"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-religion"
+        font-size="14">Religion: ${religion}</text>
+
+  <text x="315" y="340"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#9b9b9bff"
+        class="fade-up del-moreInfo"
+        font-weight="bold"
+        font-size="16">More Info</text>
+
+  <text x="340" y="370"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-job"
+        font-size="14">Job: ${job}</text>
+
+  <text x="340" y="395"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-number"
+        font-size="14">Number: +${number}</text>
+
+  <text x="340" y="420"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-email"
+        font-size="14">Gmail: ${email}</text>
+
+  <text x="340" y="445"
+        text-anchor="start"
+        font-family="Ubuntu, sans-serif"
+        fill="#ffffffff"
+        class="fade-up del-hobby"
+        font-size="14">Hobby: ${hobby}</text>
+
+  <text x="30" y="570"
+        font-size="15px"
+        fill="#FFFF"
+        font-family="Ubuntu, sans-serif"
+        class="fade-up del-star">
+    ⭐: ${totalStars} ${totalStars <= 1 ? "Star" : "Stars"}
+  </text>
+
+  <text x="30" y="590"
+        font-size="15px"
+        fill="#FFFF"
+        font-family="Ubuntu, sans-serif"
+        class="fade-up del-repo">
+    📦: ${totalRepos} ${totalRepos <= 1 ? "Repo" : "Repos"}
+  </text>
+
+  <text x="250" y="570"
+        font-size="15px"
+        fill="#FFFF"
+        font-family="Ubuntu, sans-serif"
+        class="fade-up del-issue">
+    🗣 : ${totalIssues} ${totalIssues <= 1 ? "Issue" : "Issues"}
+  </text>
+
+  <text x="250" y="590"
+        font-size="15px"
+        fill="#FFFF"
+        font-family="Ubuntu, sans-serif"
+        class="fade-up del-loc">
+    🏠: ${location}
+  </text>
+
+  <text x="470" y="570"
+        font-size="15px"
+        fill="#FFFF"
+        font-family="Ubuntu, sans-serif"
+        class="fade-up del-pull">
+    🔀: ${totalPullRequests} ${totalPullRequests <= 1 ? "Pull" : "Pulls"}
+  </text>
+
+<text x="470" y="590"
+        font-size="15px"
+        fill="#FFFF"
+        font-family="Ubuntu, sans-serif"
+        class="fade-up del-follow">
+    👥: ${followers} ${followers <= 1 ? "Follower" : "Followers"}
+  </text>
+
+  <rect x="-500" y="597" width="400" height="6" fill="#00ff88">
+    <animate attributeName="x"
+        from="-600"
+        to="600"
+        dur="1.5s"
+        repeatCount="indefinite" />
+  </rect>
+</svg>
+`;
+
+  return svg;
+}
+
+
+module.exports = { generateErrorSVG, generateSVG }
