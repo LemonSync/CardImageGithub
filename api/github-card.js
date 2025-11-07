@@ -12,13 +12,6 @@ const { wrapSVGText } = require("./utils/allFunction");
 
 // =========================================
 
-Canvas.registerFont(path.join(__dirname, "..", "fonts", "Arimo-Regular.ttf"), {
-  family: "Arimo"
-});
-
-
-//==========================================
-
 app.get("/", (req, res) => {
   res.send("🚀 Server berhasil dijalankan");
 });
@@ -125,6 +118,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
