@@ -84,6 +84,7 @@ function generateErrorSVG(
 
 /**
  * Generate SVG Card
+ * @param {string} image - User Github Image
  * @param {string} name - The Github account name
  * @param {string} desc - The Description or Bio
  * @param {number} age - The Age.
@@ -103,6 +104,7 @@ function generateErrorSVG(
  */
 
 function generateSVG(
+  image,
   name = "Not Found",
   desc = wrapSVGText("Orang yang pengen jadi programmer handal tapi enggan ngoding", 50, 17),
   age = 18,
@@ -427,3 +429,4 @@ function generateSVG(
 
 
 module.exports = { generateErrorSVG, generateSVG }
+
