@@ -84,7 +84,7 @@ function generateErrorSVG(
 
 /**
  * Generate SVG Card
- * @param {string} image - User Github Image
+ * @param {string} image - The Avatar Image in Base64
  * @param {string} name - The Github account name
  * @param {string} desc - The Description or Bio
  * @param {number} age - The Age.
@@ -104,16 +104,16 @@ function generateErrorSVG(
  */
 
 function generateSVG(
-  image,
+  image = "",
   name = "Not Found",
-  desc = wrapSVGText("Orang yang pengen jadi programmer handal tapi enggan ngoding", 50, 17),
-  age = 18,
-  study = "S1 IT",
+  desc = wrapSVGText("None", 50, 17),
+  age,
+  study = "-",
   religion = "Private",
-  job = "None",
-  number = 6282172175234,
+  job = "-",
+  number = "Private",
   email = "Private",
-  hobby = "Coding",
+  hobby = "-",
   totalStars = 0,
   totalRepos = 0,
   totalIssues = 0,
@@ -125,6 +125,9 @@ function generateSVG(
   const uid = Date.now().toString(36);
   const titleId = `title-${uid}`;
   const descId = `desc-${uid}`;
+
+  age = (typeof age === "number") ? age : "Private";
+  number = (typeof number === "number") ? `+${number}` : "Private";
 
   const svg = `
 <svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
@@ -350,7 +353,7 @@ function generateSVG(
         font-family="Ubuntu, sans-serif"
         fill="#ffffffff"
         class="fade-up del-number"
-        font-size="14">Number: +${number}</text>
+        font-size="14">Number: ${number}</text>
 
   <text x="340" y="420"
         text-anchor="start"
@@ -429,5 +432,3 @@ function generateSVG(
 
 
 module.exports = { generateErrorSVG, generateSVG }
-
-
