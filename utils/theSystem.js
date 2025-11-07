@@ -430,5 +430,79 @@ function generateSVG(
   return svg;
 }
 
+function generateSVG2(
+  image = "",
+  name = "Not Found",
+  desc = wrapSVGText("None", 50, 17)
+) {
 
-module.exports = { generateErrorSVG, generateSVG }
+  const uid = Date.now().toString(36);
+  const titleId = `title-${uid}`;
+  const descId = `desc-${uid}`;
+
+  const svg = `
+  <svg width="500" height="200" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
+      <feOffset in="blur" dx="0" dy="0" result="offsetBlur"/>
+      <feMerge>
+        <feMergeNode in="offsetBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <style>
+      @keyframes slideIn {
+        0% { transform: translateX(-100px); opacity: 0; }
+        100% { transform: translateX(0); opacity: 1; }
+      }
+
+      @keyframes glowAnimation {
+        0%, 100% { filter: drop-shadow(0 0 5px #00ff00); }
+        50% { filter: drop-shadow(0 0 20px #00ff00); }
+      }
+
+      .animated-img {
+        animation: slideIn 1.5s ease-out forwards;
+      }
+
+      .animated-frame {
+        animation: slideIn 1.5s ease-out forwards, glowAnimation 2s infinite;
+      }
+
+      .profile-text {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #ffffff;
+        text-anchor: middle;
+        opacity: 0;
+        animation: slideIn 1.5s ease-out forwards;
+      }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="50%" height="100%" fill="#00a458ff" />
+  <rect x="50%" y="0" width="50%" height="100%" fill="#216038" />
+  <rect x="49%" y="0" width="2%" height="100%" fill="black" opacity="0.3" filter="url(#shadow)" />
+
+  <circle cx="125" cy="70" r="40" fill="url(#imgPattern)" class="animated-img" />
+  <!-- Bingkai bulat -->
+  <circle cx="125" cy="70" r="42" fill="none" stroke="#00ff00" stroke-width="4" class="animated-frame" />
+
+  <text x="125" y="135" class="profile-text">${name.toUpperCase()}</text>
+
+  <defs>
+    <pattern id="imgPattern" patternUnits="userSpaceOnUse" width="80" height="80">
+      <image href="https://via.placeholder.com/80" x="0" y="0" width="80" height="80" />
+    </pattern>
+  </defs>
+</svg>
+
+  `;
+
+  return svg;
+}
+
+module.exports = { generateErrorSVG, generateSVG, generateSVG2 }
