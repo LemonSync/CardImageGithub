@@ -74,8 +74,6 @@ app.get("/api/svg-card/", async (req, res) => {
   return res.send(errorSvg);
 }  
 
-  const github = await getGithubData(name)
-
 /*  const github = {};
   github.name = "Lemon";
   github.bio = "About You And Me";
@@ -87,15 +85,28 @@ app.get("/api/svg-card/", async (req, res) => {
   github.followers = 47;
 */
 
+  const github = await getGithubData(name)
+
   if (!desc) {
     desc = github.bio || "No description provided.";
   }
 
+  // ==========================================
+  
   name = github.name.toUpperCase();
   desc = `❝ ${desc} ❞`;
   desc = wrapSVGText(desc, 50, 17);
 
+  const avatarBuffer = await fetch(github.avatar_url)
+    .then(r => r.arrayBuffer())
+    .then(buf => Buffer.from(buf));
+
+  const avatarBase64 = avatarBuffer.toString("base64");
+  
+  // ==========================================
+
   const svg = await generateSVG(
+    avatarBase64,
     name,
     desc,
     age,
@@ -118,6 +129,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
