@@ -261,7 +261,7 @@ function generateSVG(
   </clipPath>
 
   <image
-    href="https"
+    href="data:image/png;base64,${image}"
     x="240"
     y="40"
     width="120"
@@ -429,4 +429,5 @@ function generateSVG(
 
 
 module.exports = { generateErrorSVG, generateSVG }
+
 
