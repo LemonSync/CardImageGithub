@@ -14,6 +14,7 @@ with animations, statistics, personal info, and fallback messaging for errors.
 - Multiple card layouts using parameters
 - Fallback SVG **error card** for invalid/missing data
 - Supports extended info such as:
+  - Description
   - Age
   - Study / Education
   - Religion
@@ -26,20 +27,36 @@ with animations, statistics, personal info, and fallback messaging for errors.
 
 ## 📌 Available API Endpoints
 
-### 1️⃣ /api/svg-card
-Generate SVG card containing GitHub + personal information.
+### 1️⃣ /api/svg-card?type=1
+Generate SVG card containing GitHub + Description + personal information.
 
 **Example usage:**
 ```
-/api/svg-card?name=octocat&age=18&study=IT&religion=None&job=Developer&number=08123&email=octo@gmail.com&hobby=Coding
+/api/svg-card?type=1&name=octocat&age=18&study=IT&religion=None&job=Developer&number=08123&email=octo@gmail.com&hobby=Coding
 ```
 
 | Parameter | Required | Description |
 |----------|----------|-------------|
 | name | ✅ | GitHub username (fetches avatar + stats) |
 | desc | ❌ | Custom bio |
-| age, study, religion, job, number, email, hobby | ✅ | Personal details |
+| age, study, religion, job, number, email, hobby | ❌ | Personal details |
 
+---
+
+### 2️⃣ /api/svg-card?type=2
+Generate SVG card containing GitHub + Description.
+
+**Example usage:**
+```
+/api/svg-card?type=2&name=lemonsync&desc=About%20You%20And%20Me
+```
+
+| Parameter | Required | Description |
+|----------|----------|-------------|
+| name | ✅ | GitHub username (fetches avatar + stats) |
+| desc | ❌ | Custom bio |
+
+---
 ---
 
 ## 🧠 How It Works
