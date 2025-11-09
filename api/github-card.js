@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 
 const { getGithubData } = require("../utils/githubData")
-const { generateErrorSVG, generateSVG, generateSVG2 } = require("../utils/theSystem")
+const { generateErrorSVG, generateSVGOne, generateSVGTwo } = require("../utils/theSystem")
 const { wrapSVGText, wrapSVGTextCenter } = require("../utils/allFunction");
 
 // =========================================
@@ -139,6 +139,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
