@@ -68,7 +68,7 @@ flowchart TD
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
 Server will run at:
@@ -94,6 +94,6 @@ http://localhost:3000
 
 ## ❤️ Credits
 
-Built by *LemonSync* — simple idea, powerful visualization.
+Built by *LemonSync* — about me and you, powerful visualization.
 
 Feel free to contribute improvements, additional card styles, and layout themes! 🚀
