@@ -84,7 +84,10 @@ app.get("/api/svg-card/", async (req, res) => {
 
   if (typeNum == 1) {
 
-  const svg = await generateSVG(
+  desc = `❝ ${desc} ❞`;
+  desc = wrapSVGText(desc, 50, 17);
+
+  const svg = await generateSVGOne(
     avatarBase64,
     name,
     desc,
@@ -107,8 +110,9 @@ app.get("/api/svg-card/", async (req, res) => {
   res.send(svg);
 
   } else if (typeNum == 2) {
-    
-    const svg2 = await generateSVG2(
+
+    desc = wrapSVGTextCenter(desc, 600, 75, 40, 18);
+    const svg2 = await generateSVGTwo(
       avatarBase64,
       name,
       desc
@@ -117,7 +121,7 @@ app.get("/api/svg-card/", async (req, res) => {
     res.setHeader("Content-Type", "image/svg+xml");
     res.send(svg2);
   } else {
-    
+
     const errorSvg = generateErrorSVG(
       "Error, Type must be 1 or 2.\n",
       "The form cannot be processed before the type is filled in correctly.",
@@ -132,6 +136,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
