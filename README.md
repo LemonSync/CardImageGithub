@@ -64,16 +64,6 @@ flowchart TD
 
 ---
 
-## 🔐 Environment Variables
-
-You can optionally use GitHub token to increase rate limits:
-
-```
-GITHUB_TOKEN=your_personal_token_here
-```
-
----
-
 ## 🚀 Local Development
 
 ```bash
