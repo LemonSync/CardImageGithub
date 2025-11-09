@@ -8,7 +8,7 @@ app.use(cors());
 
 const { getGithubData } = require("../utils/githubData")
 const { generateErrorSVG, generateSVG, generateSVG2 } = require("../utils/theSystem")
-const { wrapSVGText } = require("../utils/allFunction");
+const { wrapSVGText, wrapSVGTextCenter } = require("../utils/allFunction");
 
 // =========================================
 
@@ -63,6 +63,9 @@ app.get("/api/svg-card/", async (req, res) => {
       1150,
       160
     )
+
+    res.setHeader("Content-Type", "image/svg+xml");
+    return res.send(errorSvg);
   });
 
   if (!desc) {
@@ -136,6 +139,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
