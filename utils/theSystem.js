@@ -1,18 +1,4 @@
-const { wrapSVGText, capitalize } = require("./allFunction");
-
-function escapeXML(str = "") {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
-
-function svgMultiline(text, lineHeight = 18) {
-  return escapeXML(text)
-    .split('\n')
-    .map((line, i) => `<tspan x="0" dy="${i === 0 ? 0 : lineHeight}">${line}</tspan>`)
-    .join('');
-}
+const { wrapSVGText, capitalize, escapeXML, svgMultiline, wrapSVGTextCenter } = require("./allFunction");
 
 
 
@@ -74,7 +60,6 @@ function generateErrorSVG(
         <text class="sub" x="0" y="20">${svgMultiline(desc)}</text>
       </g>
     </g>
-
   </svg>`;
 }
 
@@ -84,9 +69,9 @@ function generateErrorSVG(
 
 /**
  * Generate SVG Card
- * @param {string} image - The Avatar Image in Base64
- * @param {string} name - The Github account name
- * @param {string} desc - The Description or Bio
+ * @param {string} image - User Github Image
+ * @param {string} name - User Github Name
+ * @param {string} desc - Description or Github Bio
  * @param {number} age - The Age.
  * @param {string} study - The Study.
  * @param {number} religion - The religion.
@@ -100,10 +85,10 @@ function generateErrorSVG(
  * @param {string} location - The Adress
  * @param {number} totalPullRequests - Github Pull Request
  * @param {number} followers - Github Follower
- * @returns {string} - SVG dalam bentuk string
+ * @returns {string} - SVG on string data type
  */
 
-function generateSVG(
+function generateSVGOne(
   image = "",
   name = "Not Found",
   desc = wrapSVGText("None", 50, 17),
@@ -127,7 +112,9 @@ function generateSVG(
   const descId = `desc-${uid}`;
 
   age = (typeof age === "number") ? age : "Private";
-  number = (typeof number === "number") ? `+${number}` : "Private";
+  if (number && /^\d+$/.test(number)) number = `+${number}`;
+  else number = "Private";
+
 
   const svg = `
 <svg width="600" height="600" xmlns="http://www.w3.org/2000/svg">
@@ -430,18 +417,35 @@ function generateSVG(
   return svg;
 }
 
-function generateSVG2(
+/**
+ * @param {string} image - User Github Image
+ * @param {string} name - User Github Name
+ * @param {string} desc - Description or Github Bio
+ * @param {number} totalStars - Github Star
+ * @param {number} totalRepos - Github Repositories
+ * @param {number} totalIssues - Github Issue
+ * @param {string} location - The Adress
+ * @param {number} totalPullRequests - Github Pull Request
+ * @param {number} followers - Github Follower
+ * @returns {string} - SVG on string data type
+ */
+
+function generateSVGTwo(
   image = "",
   name = "Not Found",
-  desc = wrapSVGText("None", 50, 17)
+  desc = wrapSVGTextCenter(`None`, 600, 75, 40, 18)
 ) {
 
   const uid = Date.now().toString(36);
   const titleId = `title-${uid}`;
   const descId = `desc-${uid}`;
 
+  
+
   const svg = `
-  <svg width="500" height="200" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+  <svg width="800" height="150" viewBox="0 0 800 150" xmlns="http://www.w3.org/2000/svg">
+  <title id="${titleId}">${escapeXML("Lemon Card - SVG Card")}</title>
+  <desc id="${descId}">${escapeXML("LemonSync")}</desc>
   <defs>
     <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
@@ -453,8 +457,13 @@ function generateSVG2(
     </filter>
 
     <style>
-      @keyframes slideIn {
-        0% { transform: translateX(-100px); opacity: 0; }
+      @keyframes slideInLeft {
+        0% { transform: translateX(-50px); opacity: 0; }
+        100% { transform: translateX(0); opacity: 1; }
+      }
+
+      @keyframes slideInRight {
+        0% { transform: translateX(+50px); opacity: 0; }
         100% { transform: translateX(0); opacity: 1; }
       }
 
@@ -463,12 +472,26 @@ function generateSVG2(
         50% { filter: drop-shadow(0 0 20px #00ff00); }
       }
 
+      .fade-up {
+        transform-box: fill-box;
+        transform-origin: center;
+        opacity: 0;
+        animation: slideInLeft 1.5s forwards ease-out;
+      }
+
+      .del-star { animation-delay: 0.6s; }
+      .del-repo { animation-delay: 0.7s; }
+      .del-issue { animation-delay: 0.8s; }
+      .del-loc { animation-delay: 0.9s; }
+      .del-pull { animation-delay: 1s; }
+      .del-follow { animation-delay: 1.1s; }
+
       .animated-img {
-        animation: slideIn 1.5s ease-out forwards;
+        animation: slideInLeft 1.5s ease-out forwards;
       }
 
       .animated-frame {
-        animation: slideIn 1.5s ease-out forwards, glowAnimation 2s infinite;
+        animation: slideInLeft 1.5s ease-out forwards, glowAnimation 2s infinite;
       }
 
       .profile-text {
@@ -478,7 +501,17 @@ function generateSVG2(
         fill: #ffffff;
         text-anchor: middle;
         opacity: 0;
-        animation: slideIn 1.5s ease-out forwards;
+        animation: slideInLeft 1.5s ease-out forwards;
+      }
+
+      .desc-text {
+        font-family: Arial, sans-serif;
+        font-style: italic;
+        font-size: 16px;
+        fill: #ffffff;
+        text-anchor: start;
+        opacity: 0;
+        animation: slideInRight 1.5s ease-out forwards;
       }
     </style>
   </defs>
@@ -487,22 +520,30 @@ function generateSVG2(
   <rect x="50%" y="0" width="50%" height="100%" fill="#216038" />
   <rect x="49%" y="0" width="2%" height="100%" fill="black" opacity="0.3" filter="url(#shadow)" />
 
-  <circle cx="125" cy="70" r="40" fill="url(#imgPattern)" class="animated-img" />
-  <!-- Bingkai bulat -->
-  <circle cx="125" cy="70" r="42" fill="none" stroke="#00ff00" stroke-width="4" class="animated-frame" />
+  <circle cx="200" cy="60" r="40" fill="url(#imgPattern)" class="animated-img" />
+  <circle cx="200" cy="60" r="42" fill="none" stroke="#00ff00" stroke-width="4" class="animated-frame" />
 
-  <text x="125" y="135" class="profile-text">${name.toUpperCase()}</text>
+    <defs>
+  <pattern id="imgPattern"
+    patternUnits="objectBoundingBox"
+    patternContentUnits="objectBoundingBox"
+    width="1"
+    height="1">
+    <image href="data:image/png;base64,${image}"
+      preserveAspectRatio="xMidYMid slice"
+      x="0"
+      y="0"
+      width="1"
+      height="1" />
+  </pattern>
+</defs>
 
-  <defs>
-    <pattern id="imgPattern" patternUnits="userSpaceOnUse" width="80" height="80">
-      <image href="https://via.placeholder.com/80" x="0" y="0" width="80" height="80" />
-    </pattern>
-  </defs>
+  <text x="200" y="125" class="profile-text">${name.toUpperCase()}</text>
+  <text x="100" y="135" class="desc-text">${desc}</text>
 </svg>
-
   `;
 
   return svg;
 }
 
-module.exports = { generateErrorSVG, generateSVG, generateSVG2 }
+module.exports = { generateErrorSVG, generateSVGOne, generateSVGTwo }
