@@ -1,9 +1,9 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/svg-card.js", "use": "@vercel/node" }
+    { "src": "api/github-card.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/svg-card.js" }
+    { "src": "/api/(.*)", "dest": "/api/github-card.js" }
   ]
 }
