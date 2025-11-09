@@ -80,7 +80,6 @@ app.get("/api/svg-card/", async (req, res) => {
   const avatarBase64 = avatarBuffer.toString("base64");
 
   name = github.name.toUpperCase();
-  desc = wrapSVGText(desc, 50, 17);
 
   // ==========================================
 
@@ -138,6 +137,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
