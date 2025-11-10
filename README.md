@@ -111,6 +111,6 @@ http://localhost:3000
 
 ## ❤️ Credits
 
-Built by *LemonSync* — about me and you, powerful visualization.
+Built by *[LemonSync](https://lemonsync.my.id/portofolio/index.html)* — about me and you, powerful visualization.
 
 Feel free to contribute improvements, additional card styles, and layout themes! 🚀
