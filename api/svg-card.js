@@ -36,7 +36,7 @@ app.get("/api/svg-card/", async (req, res) => {
       "Error, Please fill in Type, and Username.\n",
       "The form cannot be processed before the username is filled in.",
       "Example: /api/svg-card?type=2&name=YourName&age=YourAge&study=YourStudy&religion=YourReligion&job=YourJob&number=YourNumber&email=YourEmail&hobby=YourHobby\nParameters: name, desc(not mandatory) age(not mandatory), study(not mandatory), religion(not mandatory), job(not mandatory), number(not mandatory), email(not mandatory), hobby(not mandatory)",
-      1150,
+      1250,
       160
     );
 
@@ -137,6 +137,7 @@ app.get("/api/svg-card/", async (req, res) => {
 });
 
 module.exports = app;
+
 
 
 
